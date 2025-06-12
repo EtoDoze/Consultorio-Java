@@ -1,17 +1,8 @@
 public class Pessoa {
-    private String cpf;
     private String nome;
-    private String dataNascimento;
+    private String email;
 
     // Métodos get e set
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
     public String getNome() {
         return nome;
     }
@@ -19,18 +10,23 @@ public class Pessoa {
     public void setNome(String nome) {
         this.nome = nome;
     }
-
-    public String getDataNascimento() {
-        return dataNascimento;
+    
+    public String getEmail() {
+        return email;
     }
     
-    public void setDataNascimento(String dataNascimento) {
-        this.dataNascimento = dataNascimento;
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    
+    public Pessoa(String nome, String email){
+        this.nome = nome;
+        this.email = email;
+
     }
 
     public void exibirInfo(){
         System.out.println("Nome: "+ nome);
-        System.out.println("CPF: "+ cpf);
-        System.out.println("Data de Nascimento: "+ dataNascimento);
+        System.out.println("Email: "+ email);
     }
 }
