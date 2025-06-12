@@ -1,0 +1,17 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "Main",
+            "projectName": "GranTurismo-Java_8c294588"
+        },
+        35,
+        -20,
+        0,
+        191,
+        0,
+        357
+    ]
+}
