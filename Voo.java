@@ -1,4 +1,4 @@
-package GranTurismo;
+package GranTurismoJava;
 
 // classe do voo com os atributos e métodos
 public class Voo {

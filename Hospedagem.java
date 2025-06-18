@@ -1,4 +1,4 @@
-package GranTurismo;
+package GranTurismoJava;
 
 // classe de hospedagem
 public class Hospedagem {

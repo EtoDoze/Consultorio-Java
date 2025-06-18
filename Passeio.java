@@ -1,4 +1,4 @@
-package GranTurismo;
+package GranTurismoJava;
 
 // classe do passeio
 public class Passeio {

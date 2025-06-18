@@ -1,4 +1,4 @@
-package GranTurismo;
+package GranTurismoJava;
 
 public class Reserva implements MetodoPagamento {
     private int codigoReserva;
