@@ -1,4 +1,4 @@
-package GranTurismo;
+package GranTurismoJava;
 
 public class CartaoCredito implements MetodoPagamento {
     private String numeroCartao;

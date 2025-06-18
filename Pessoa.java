@@ -1,4 +1,4 @@
-package GranTurismo;
+package GranTurismoJava;
 
 public class Pessoa {
     private String nome;

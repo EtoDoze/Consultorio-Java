@@ -1,4 +1,4 @@
-package GranTurismo;
+package GranTurismoJava;
 
 public interface ServicoContratavel {
     void contratar();

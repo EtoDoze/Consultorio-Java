@@ -1,4 +1,4 @@
-package GranTurismo;
+package GranTurismoJava;
 
 public class Cliente extends Pessoa {
     private String cpf;

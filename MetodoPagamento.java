@@ -1,4 +1,4 @@
-package GranTurismo;
+package GranTurismoJava;
 
 public interface MetodoPagamento {
     boolean processarPagamento(double valor);
