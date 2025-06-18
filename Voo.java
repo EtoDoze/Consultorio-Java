@@ -1,64 +1,25 @@
 package GranTurismo;
 
+// classe do voo com os atributos e métodos
 public class Voo {
-    private String CompanhiaAerea;
-    private String origem;
-    private String destinoVoo;
-    private double precoPasagem;
+    String companhiaAerea; // nome da cia
+    String origem; // de onde sai
+    String destinoVoo; // pra onde vai
+    double precoPassagem; // preço
 
-    // Métodos get e set
-    public String getCompanhiaAerea() {
-        return CompanhiaAerea;
-    }
-
-    public void setCompanhiaAerea(String CompanhiaAerea) {
-        this.CompanhiaAerea = CompanhiaAerea;
-    }
-
-    public String getOrigem() {
-        return origem;
-    }
-
-    public void setOrigem(String origem) {
-        this.origem = origem;
-    }
-
-    public String getdestinoVoo() {
-        return destinoVoo;
-    }
-
-    public void setdestinoVoo(String destinoVoo) {
-        this.destinoVoo = destinoVoo;
-    }
-
-    public double getPrecoPasagem() {
-        return precoPasagem;
-    }
-    
-    public void setPrecoPasagem(double precoPasagem) {
-        this.precoPasagem = precoPasagem;
-    }
-
-    public Voo(String CompanhiaAerea, String origem, String destinoVoo, double precoPasagem) {
-        this.CompanhiaAerea = CompanhiaAerea;
+    public Voo(String companhiaAerea, String origem, String destinoVoo, double precoPassagem) {
+        this.companhiaAerea = companhiaAerea;
         this.origem = origem;
         this.destinoVoo = destinoVoo;
-        this.precoPasagem = precoPasagem;
-    }
-
-    public void exibirInfo() {
-        System.out.println("Companhia Aérea: " + CompanhiaAerea);
-        System.out.println("Origem: " + origem);
-        System.out.println("Destino do Voo: " + destinoVoo);
-        System.out.println("Preço da Passagem: R$" + precoPasagem);
+        this.precoPassagem = precoPassagem;
     }
 
     public String getDescricaoServico() {
-        return "Voo de " + origem + " para " + destinoVoo + " operado por " + CompanhiaAerea + " com preço de R$" + precoPasagem;
+        // yan, isso retorna uma string com a descrição do serviço do voo
+        return "Voo de " + origem + " para " + destinoVoo + " pela " + companhiaAerea;
     }
 
     public double getPreco() {
-        return precoPasagem;
+        return precoPassagem; // só retorna
     }
-    
 }

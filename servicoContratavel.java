@@ -1,6 +1,6 @@
 package GranTurismo;
 
-public class servicoContratavel {
+public class ServicoContratavel {
     public interface ServicoContratavel {
         void contratar();
         void cancelar();
