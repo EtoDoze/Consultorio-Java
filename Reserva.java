@@ -1,44 +1,30 @@
 package GranTurismoJava;
 
-public class Reserva implements MetodoPagamento {
+public class Reserva {
+    private static int contador = 0;
     private int codigoReserva;
+    private Cliente cliente;
+    private PacoteTuristico pacote;
     private MetodoPagamento metodoPagamento;
 
-    public int getCodigoReserva() {
-        return codigoReserva;
-    }
-
-    public MetodoPagamento getMetodoPagamento() {
-        return metodoPagamento;
-    }
-
-    public Reserva(int codigoReserva, MetodoPagamento metodoPagamento) {
-        this.codigoReserva = codigoReserva;
+    public Reserva(Cliente cliente, PacoteTuristico pacote, MetodoPagamento metodoPagamento) {
+        this.codigoReserva = ++contador;
+        this.cliente = cliente;
+        this.pacote = pacote;
         this.metodoPagamento = metodoPagamento;
     }
 
     public void confirmarReserva() {
-        System.out.println("Reserva " + codigoReserva + " confirmada com sucesso.");
+        double valor = pacote.getPrecoTotal();
+        if (metodoPagamento.processarPagamento(valor)) {
+            System.out.println("Reserva #" + codigoReserva + " confirmada para " + cliente.getNome());
+            System.out.println("Total pago: R$ " + valor);
+        } else {
+            System.out.println("Falha ao processar pagamento.");
+        }
     }
 
-    // Usa o metodoPagamento associado para processar o pagamento
-    public boolean realizarPagamento(double valor) {
-        return metodoPagamento.processarPagamento(valor);
-    }
-
-    // Retorna a descrição do método de pagamento associado
-    public String getDescricaoMetodoPagamento() {
-        return metodoPagamento.getDescricao();
-    }
-
-    // Implementação obrigatória da interface MetodoPagamento
-    @Override
-    public boolean processarPagamento(double valor) {
-        return metodoPagamento.processarPagamento(valor);
-    }
-
-    @Override
-    public String getDescricao() {
-        return "Pagamento de Reserva";
+    public String getResumoReserva() {
+        return "Reserva #" + codigoReserva + "\n" + pacote.getDescricaoPacote();
     }
 }

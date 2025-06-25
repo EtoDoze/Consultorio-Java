@@ -2,6 +2,7 @@ package GranTurismoJava;
 
 import java.util.Scanner;
 import java.util.Arrays;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -9,6 +10,7 @@ public class Main {
         Pessoa pessoa1;
         Cliente cliente1 = null;
         MetodoPagamento pagamento = null;
+        Reserva reserva = null;
 
         // Informações básicas
         System.out.println("Qual seu nome?:");
@@ -54,15 +56,18 @@ public class Main {
             }
         }
 
-        // Pacote turístico fictício
-        Destino destino = new Destino("Salvador", "Brasil");
-        ServicoContratavel voo = new Voo("Azul", "São Paulo", "Salvador", 450.0);
-        ServicoContratavel hospedagem = new Hospedagem("Hotel Sol", 5, 180.0);
-        ServicoContratavel passeio = new Passeio("Pelourinho Tour", 90.0);
+        // Criar destino e serviços turísticos
+        Destino destino = new Destino("Paris", "França");
 
-        PacoteTuristico pacote = new PacoteTuristico(destino, Arrays.asList(voo, hospedagem, passeio));
+        Voo voo = new Voo("Air France", "São Paulo", "Paris", 3200.00);
+        Hospedagem hospedagem = new Hospedagem("Hotel Eiffel", 5, 450.00);
+        Passeio passeio = new Passeio("Tour pela Torre Eiffel", 300.00);
 
-        Reserva reserva = new Reserva(cliente1, pacote, pagamento);
+        List<ServicoContratavel> servicos = Arrays.asList(voo, hospedagem, passeio);
+        PacoteTuristico pacote = new PacoteTuristico(destino, servicos);
+
+        // Criar reserva
+        reserva = new Reserva(cliente1, pacote, pagamento);
 
         // Menu
         while (true) {
@@ -79,10 +84,14 @@ public class Main {
                 System.out.println("Email: " + cliente1.getEmail());
                 System.out.println("CPF: " + cliente1.getCpf());
                 System.out.println("Pagamento: " + pagamento.getDescricao());
+                System.out.println("Pacote Turístico:");
+                System.out.println(pacote.getDescricaoPacote());
+                System.out.println("Preço total: R$ " + pacote.getPrecoTotal());
                 System.out.println("--------------------------------------------------");
             } else if (opcao.equals("2")) {
                 reserva.confirmarReserva();
             } else if (opcao.equals("0")) {
+                System.out.println("Encerrando...");
                 break;
             } else {
                 System.out.println("Opção inválida.");
