@@ -57,7 +57,8 @@ public class Main {
         }
 
         // Criar destino e serviços turísticos
-        Destino destino = new Destino("Paris", "França");
+        Destino destino = new Destino(null, null);
+        destino = null;
 
         Voo voo = new Voo("Air France", "São Paulo", "Paris", 3200.00);
         Hospedagem hospedagem = new Hospedagem("Hotel Eiffel", 5, 450.00);
@@ -73,6 +74,9 @@ public class Main {
         while (true) {
             System.out.println("\nOpções:");
             System.out.println("[1] Exibir Informações");
+            if (destino != null) {
+                System.out.println("[4] Seu Destino");
+            }
             //if(){System.out.println("[2] Confirmar Reserva");}
             
             System.out.println("[3] Inserir Destino");
@@ -100,7 +104,13 @@ public class Main {
                 String cidade = scanner.nextLine();
                 Destino destiny = new Destino(cidade, pais);
                 
-            } else if (opcao.equals("0")) {
+            }
+            else if ((opcao.equals("4") || opcao.equals("Seu Destino")) && destino != null) {
+                destino.getDescricao();
+                
+            }
+
+            else if (opcao.equals("0")) {
                 System.out.println("Encerrando...");
                 break;
             } else {
