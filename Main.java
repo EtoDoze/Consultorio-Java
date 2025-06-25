@@ -73,7 +73,9 @@ public class Main {
         while (true) {
             System.out.println("\nOpções:");
             System.out.println("[1] Exibir Informações");
-            System.out.println("[2] Confirmar Reserva");
+            //if(){System.out.println("[2] Confirmar Reserva");}
+            
+            System.out.println("[3] Inserir Destino");
             System.out.println("[0] Sair");
 
             String opcao = scanner.nextLine();
@@ -88,8 +90,16 @@ public class Main {
                 System.out.println(pacote.getDescricaoPacote());
                 System.out.println("Preço total: R$ " + pacote.getPrecoTotal());
                 System.out.println("--------------------------------------------------");
+
             } else if (opcao.equals("2")) {
                 reserva.confirmarReserva();
+            } else if (opcao.equals("3") || opcao.equals("Inserir Destino")) {
+                System.out.println("Qual país você quer ir?");
+                String pais = scanner.nextLine();
+                System.out.println("Qual cidade de "+ pais + " você quer ir?");
+                String cidade = scanner.nextLine();
+                Destino destiny = new Destino(cidade, pais);
+                
             } else if (opcao.equals("0")) {
                 System.out.println("Encerrando...");
                 break;

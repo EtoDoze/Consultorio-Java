@@ -1,21 +1,21 @@
 package GranTurismoJava;
 
-// classe do passeio
-public class Passeio {
-    String nomePasseio; // nome do passeio
-    double precoPasseio; // preço
+public class Passeio implements ServicoContratavel {
+    private String nomePasseio;
+    private double precoPasseio;
 
     public Passeio(String nomePasseio, double precoPasseio) {
         this.nomePasseio = nomePasseio;
         this.precoPasseio = precoPasseio;
     }
 
+    @Override
     public String getDescricaoServico() {
-        // descrição simples
         return "Passeio: " + nomePasseio;
     }
 
+    @Override
     public double getPreco() {
-        return precoPasseio; // retorna o preço
+        return precoPasseio;
     }
 }

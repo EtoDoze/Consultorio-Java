@@ -1,10 +1,9 @@
 package GranTurismoJava;
 
-// classe de hospedagem
-public class Hospedagem {
-    String nomeHotel; // nome do hotel
-    int diarias; // quantas noites
-    double precoPorNoite; // preço unitário
+public class Hospedagem implements ServicoContratavel {
+    private String nomeHotel;
+    private int diarias;
+    private double precoPorNoite;
 
     public Hospedagem(String nomeHotel, int diarias, double precoPorNoite) {
         this.nomeHotel = nomeHotel;
@@ -12,12 +11,13 @@ public class Hospedagem {
         this.precoPorNoite = precoPorNoite;
     }
 
+    @Override
     public String getDescricaoServico() {
-        // descrição meio improvisada
-        return diarias + " noites no hotel " + nomeHotel;
+        return "Hospedagem em " + nomeHotel + " por " + diarias + " noites";
     }
 
+    @Override
     public double getPreco() {
-        return diarias * precoPorNoite; // calcula o total
+        return diarias * precoPorNoite;
     }
 }
