@@ -11,8 +11,10 @@ public class Main {
         Cliente cliente1 = null;
         MetodoPagamento pagamento = null;
         Reserva reserva = null;
+        Destino destino = null;
+        PacoteTuristico pacote = null;
 
-        // Informações básicas
+        // Cadastro básico
         System.out.println("Qual seu nome?:");
         String nome = scanner.nextLine();
 
@@ -39,13 +41,13 @@ public class Main {
         while (pagamento == null) {
             System.out.println("Falta pouco! Agora registre sua chave pix ou seu cartão.");
             System.out.println("Chave Pix[1] \nCartão de Crédito[2]");
-            String tipoconta = scanner.nextLine();
+            String tipoConta = scanner.nextLine();
 
-            if (tipoconta.equalsIgnoreCase("1") || tipoconta.equalsIgnoreCase("Chave Pix")) {
+            if (tipoConta.equalsIgnoreCase("1") || tipoConta.equalsIgnoreCase("Chave Pix")) {
                 System.out.println("Chave pix:");
                 String chavepix = scanner.nextLine();
                 pagamento = new TransferenciaBancaria(chavepix);
-            } else if (tipoconta.equalsIgnoreCase("2") || tipoconta.equalsIgnoreCase("Cartão de Crédito")) {
+            } else if (tipoConta.equalsIgnoreCase("2") || tipoConta.equalsIgnoreCase("Cartão de Crédito")) {
                 System.out.println("Número do cartão:");
                 String numero = scanner.nextLine();
                 System.out.println("Nome do titular:");
@@ -56,68 +58,106 @@ public class Main {
             }
         }
 
-        // Criar destino e serviços turísticos
-        Destino destino = new Destino(null, null);
-        destino = null;
-
-        Voo voo = new Voo("Air France", "São Paulo", "Paris", 3200.00);
-        Hospedagem hospedagem = new Hospedagem("Hotel Eiffel", 5, 450.00);
-        Passeio passeio = new Passeio("Tour pela Torre Eiffel", 300.00);
-
-        List<ServicoContratavel> servicos = Arrays.asList(voo, hospedagem, passeio);
-        PacoteTuristico pacote = new PacoteTuristico(destino, servicos);
-
-        // Criar reserva
-        reserva = new Reserva(cliente1, pacote, pagamento);
-
-        // Menu
+        // Menu principal
         while (true) {
             System.out.println("\nOpções:");
             System.out.println("[1] Exibir Informações");
-            if (destino != null) {
-                System.out.println("[4] Seu Destino");
-            }
-            //if(){System.out.println("[2] Confirmar Reserva");}
-            
-            System.out.println("[3] Inserir Destino");
-            System.out.println("[0] Sair");
 
+            if (destino == null) {
+                System.out.println("[3] Inserir Destino e Serviços");
+            } else {
+                System.out.println("[4] Ver Seu Destino");
+                System.out.println("[2] Confirmar Reserva");
+            }
+
+            System.out.println("[0] Sair");
             String opcao = scanner.nextLine();
 
-            if (opcao.equals("1")) {
-                System.out.println("--------------------------------------------------");
-                System.out.println("Cliente: " + cliente1.getNome());
-                System.out.println("Email: " + cliente1.getEmail());
-                System.out.println("CPF: " + cliente1.getCpf());
-                System.out.println("Pagamento: " + pagamento.getDescricao());
-                System.out.println("Pacote Turístico:");
-                System.out.println(pacote.getDescricaoPacote());
-                System.out.println("Preço total: R$ " + pacote.getPrecoTotal());
-                System.out.println("--------------------------------------------------");
+            switch (opcao) {
+                case "1":
+                    System.out.println("-".repeat(50));
+                    System.out.println("Cliente: " + cliente1.getNome());
+                    System.out.println("Email: " + cliente1.getEmail());
+                    System.out.println("CPF: " + cliente1.getCpf());
+                    System.out.println("Pagamento: " + pagamento.getDescricao());
+                    if (destino != null && pacote != null) {
+                        System.out.println("-".repeat(50));
+                        System.out.println("Destino: " + destino.getDescricao());
+                        System.out.println("Pacote Turístico:");
+                        System.out.println(pacote.getDescricaoPacote());
+                        System.out.println("Preço total: R$ " + pacote.getPrecoTotal());
+                    }
+                    System.out.println("-".repeat(50));
+                    break;
 
-            } else if (opcao.equals("2")) {
-                reserva.confirmarReserva();
-            } else if (opcao.equals("3") || opcao.equals("Inserir Destino")) {
-                System.out.println("Qual país você quer ir?");
-                String pais = scanner.nextLine();
-                System.out.println("Qual cidade de "+ pais + " você quer ir?");
-                String cidade = scanner.nextLine();
-                Destino destiny = new Destino(cidade, pais);
-                
-            }
-            else if ((opcao.equals("4") || opcao.equals("Seu Destino")) && destino != null) {
-                destino.getDescricao();
-                
-            }
+                case "2":
+                    if (reserva != null) {
+                        reserva.confirmarReserva();
+                    } else {
+                        System.out.println("Você precisa definir o destino antes de confirmar a reserva.");
+                    }
+                    break;
 
-            else if (opcao.equals("0")) {
-                System.out.println("Encerrando...");
-                break;
-            } else {
-                System.out.println("Opção inválida.");
+                case "3":
+                    if (destino == null) {
+                        System.out.println("Qual país você quer ir?");
+                        String pais = scanner.nextLine();
+                        System.out.println("Qual cidade de " + pais + " você quer ir?");
+                        String cidade = scanner.nextLine();
+
+                        destino = new Destino(cidade, pais);
+
+                        System.out.println("Qual companhia aérea?");
+                        String companhia = scanner.nextLine();
+                        System.out.println("Origem do voo:");
+                        String origem = scanner.nextLine();
+                        double precoVoo = 500;
+                        System.out.println("Preço da passagem: "+precoVoo+"R$");
+
+                        System.out.println("Qual hotel:");
+                        String nomeHotel = scanner.nextLine();
+                        System.out.println("Quantas diárias?");
+                        int diarias = Integer.parseInt(scanner.nextLine());
+                        double precoNoite = 50;
+                        System.out.println("Preço por noite: "+precoNoite+"R$");
+
+                        System.out.println("Nome do passeio:");
+                        String nomePasseio = scanner.nextLine();
+                        double precoPasseio = 70;
+                        System.out.println("Preço do passeio: "+precoPasseio+"R$");
+
+                        Voo voo = new Voo(companhia, origem, cidade, precoVoo);
+                        Hospedagem hospedagem = new Hospedagem(nomeHotel, diarias, precoNoite);
+                        Passeio passeio = new Passeio(nomePasseio, precoPasseio);
+
+                        List<ServicoContratavel> servicos = Arrays.asList(voo, hospedagem, passeio);
+
+                        pacote = new PacoteTuristico(destino, servicos);
+                        reserva = new Reserva(cliente1, pacote, pagamento);
+
+                        System.out.println("Destino e pacote registrados com sucesso!");
+                        System.out.println("-".repeat(50));
+                    } else {
+                        System.out.println("Destino já foi definido.");
+                    }
+                    break;
+
+                case "4":
+                    if (destino != null) {
+                        System.out.println("-".repeat(50));
+                        System.out.println("Destino selecionado: " + destino.getDescricao());
+                        System.out.println("-".repeat(50));
+                    }
+                    break;
+
+                case "0":
+                    System.out.println("Encerrando...");
+                    scanner.close();
+                    return;
+
+                default:
+                    System.out.println("Opção inválida.");
             }
         }
-
-        scanner.close();
     }
 }
